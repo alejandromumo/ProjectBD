@@ -8,23 +8,17 @@ namespace ProjetoBD
 {
     public class League
     {
-        public String Nome { get; set; }
+        public String LeagueName { get; set; }
 
-        public String DataFundação { get; set; }
+        public DateTime Date { get; set; }
 
-        public String País { get; set; }
+        public String Country { get; set; }
 
-        public String Nome_Desporto { get; set; }
+        public String SportName { get; set; }
 
-        public String URL_Externo { get; set; }
+        public String URL { get; set; }
 
+        public int ID_Externo { get; set; }
 
-        public String FullInfo
-        {
-            get
-            {
-                return $"{Nome} {País} {Nome_Desporto}";
-            }
-        }
     }
 }

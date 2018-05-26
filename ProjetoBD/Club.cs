@@ -6,20 +6,30 @@ using System.Threading.Tasks;
 
 namespace ProjetoBD
 {
-    class Club
+    public class Club
     {
-        public String Nome{ get; set; }
+        public String ClubName{ get; set; }
 
-        public String Cidade{ get; set; }
+        public String LeagueName{ get; set; }
 
-        public String DataFundação { get; set; }
+        public DateTime Date { get; set; }
 
-        public String Nome_Liga { get; set; }
+        public String City { get; set; }
 
-        public String Nome_Desporto { get; set; }
+        public String URL { get; set; }
 
-        public String URL_Externo { get; set; }
+        public String Country { get; set; }
 
+        public int ID_Externo { get; set; }
+
+
+        public String FullInfo
+        {
+            get
+            {
+                return $"{ClubName} {LeagueName} {Country} {City} {URL} {ID_Externo}";
+            }
+        }
 
     }
 }

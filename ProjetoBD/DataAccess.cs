@@ -28,127 +28,264 @@ namespace ProjetoBD
             }
         }
 
-        public void insertPerson(string name, int ID)
+        /// <summary>
+        /// Establishes a connection with LocalDB/projetoDB and queries it looking for a League with given parameters, 
+        /// using p_getLeagueByname Stored Procedure.
+        /// </summary>
+        /// <param name="leagueName"></param>
+        /// <returns></returns>
+        public List<League> getLeagueByName(string leagueName)
         {
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("projetoDB")))
             {
                 try
                 {
-                    String query = String.Format("insert into Pessoa(Nome, ID) values('{0}', '{1}');", name, ID);
-                    connection.Execute(query);
-                    Console.WriteLine($"Person {name} successfully inserted into DB");
+                    var retrievedLeagues = connection.Query<League>("dbo.p_getLeagueByName @leagueName", new { leagueName = leagueName }).ToList();
+                    return retrievedLeagues;
+
                 }
-                catch (System.Data.SqlClient.SqlException)
+                catch (System.Data.SqlClient.SqlException e)
                 {
-                    Console.WriteLine($"Person {name} already exists");
+                    Console.WriteLine(e.Message);
+                    return null;
                 }
             }
         }
 
-        public void insertPosition(string name)
+        /// <summary>
+        /// Establishes a connection with LocalDB/projetoDB and queries it looking for a Club with given parameters, 
+        /// using p_getClubByname Stored Procedure.        /// </summary>
+        /// <param name="clubName"></param>
+        /// <returns></returns>
+        public List<Club> getClubByName(string clubName)
         {
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("projetoDB")))
             {
                 try
                 {
-                    String query = String.Format("insert into Posição(Nome, Nome_Desporto) values('{0}, '{1}');", name, "Football");
-                    connection.Execute(query);
-                    Console.WriteLine($"Position {name} successfully inserted into DB");
+                    var retrievedClubs = connection.Query<Club>("dbo.p_getClubByName @clubName", new { clubName = clubName }).ToList();
+                    return retrievedClubs;
+
                 }
-                catch (System.Data.SqlClient.SqlException)
+                catch (System.Data.SqlClient.SqlException e)
                 {
-                    Console.WriteLine($"Position {name} already exists");
+                    Console.WriteLine(e.Message);
+                    return null;
                 }
             }
         }
 
-        public void insertLeague(string leagueName, string country = null, string sport = null, string url = null)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="playerName"></param>
+        /// <returns></returns>
+        public List<Jogador> getPlayerByName(string playerName)
         {
-            if (getAnything<URL>("URL_Externo", url, "URL_Externo").Count == 0)
-                insertURL(url, "League");
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("projetoDB")))
             {
                 try
                 {
-                    String query = String.Format("insert into Liga(Nome, Nome_Desporto, URL_Externo, País) values('{0}', '{1}', '{2}', '{3}');", leagueName, sport, url, country);
-                    connection.Execute(query);
-                    Console.WriteLine($"League {leagueName} successfully inserted into DB");
+                    var retrievedPlayers = connection.Query<Jogador>("dbo.p_getPlayerByName @playerName", new { playerName = playerName }).ToList();
+                    return retrievedPlayers;
+
                 }
-                catch (System.Data.SqlClient.SqlException)
+                catch (System.Data.SqlClient.SqlException e)
                 {
-                    Console.WriteLine($"League {leagueName} already exists");
+                    Console.WriteLine(e.Message);
+                    return null;
                 }
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="positionName"></param>
+        /// <returns></returns>
+        public List<Posição> getPositionByName(string positionName)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("projetoDB")))
+            {
+                try
+                {
+                    var retrievedPosition = connection.Query<Posição>("dbo.p_getPositionByName @positionName", new { positionName = positionName }).ToList();
+                    return retrievedPosition;
+
+                }
+                catch (System.Data.SqlClient.SqlException e)
+                {
+                    Console.WriteLine(e.Message);
+                    return null;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Establishes a connection with LocalDB/projetoDB and tries to insert a Sport into it with given parameters, 
+        /// using p_insertSportByName Stored Procedure.
+        /// </summary>
+        /// <param name="sportName"></param>
+        /// <param name="URL"></param>
+        public void insertSport(string sportName, string URL)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("projetoDB")))
+            {
+                try
+                {
+                    List<Sport> sports = new List<Sport>();
+                    sports.Add(new Sport { SportName = sportName, URL = URL });
+                    connection.Execute("dbo.p_insertSportByName @SportName, @URL", sports);
+                }
+                catch (System.Data.SqlClient.SqlException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Establishes a connection with LocalDB/projetoDB and tries to insert a League into it with given parameters, 
+        /// using p_insertLeagueByName Stored Procedure.
+        /// </summary>
+        /// <param name="leagueName"></param>
+        /// <param name="date"></param>
+        /// <param name="country"></param>
+        /// <param name="url"></param>
+        /// <param name="sportName"></param>
+        public void insertLeague(string leagueName, DateTime date, string country, string url, string sportName, int ID_Externo)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("projetoDB")))
+            {
+                try
+                {
+                    Console.WriteLine($"{leagueName} {sportName}");
+                    List<League> leagues = new List<League>();
+                    leagues.Add(new League { LeagueName = leagueName, Date = date, SportName = sportName, Country = country, URL = url, ID_Externo = ID_Externo });
+                    connection.Execute("dbo.p_insertLeagueByName @LeagueName, @Date, @Country, @URL, @SportName, @ID_Externo", leagues);
+                }
+                catch (System.Data.SqlClient.SqlException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Establishes a connection with LocalDB/projetoDB and tries to insert a Club into it with given parameters, 
+        /// using p_insertClubByName Stored Procedure.        /// </summary>
+        /// <param name="clubName"></param>
+        /// <param name="leagueName"></param>
+        /// <param name="date"></param>
+        /// <param name="City"></param>
+        /// <param name="url"></param>
+        public void insertClub(string clubName, string leagueName, DateTime date, string City, string url, int ID_Externo)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("projetoDB")))
+            {
+                try
+                {
+                    Console.WriteLine($"{clubName} {leagueName}");
+                    List<Club> list = new List<Club>();
+                    list.Add(new Club {ClubName = clubName, LeagueName = leagueName, Date = date, City = City, URL = url, ID_Externo = ID_Externo });
+                    connection.Execute("dbo.p_insertClubByName @ClubName, @LeagueName, @Date, @City, @URL, @ID_Externo", list);
+                }
+                catch (System.Data.SqlClient.SqlException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Establishes a connection with LocalDB/projetoDB and tries to insert a Player into it with given parameters, 
+        /// using p_insertPlayerByName Stored Procedure.
+        /// </summary>
+        /// <param name="playerName"></param>
+        /// <param name="clubName"></param>
+        /// <param name="position"></param>
+        /// <param name="url"></param>
+        /// <param name="nationality"></param>
+        /// <param name="birthdate"></param>
+        /// <param name="height"></param>
+        /// <param name="weight"></param>
+        public void insertPlayer(string playerName, string clubName, string position, string url, string nationality, DateTime? birthdate, int? height, int? weight, int? ID_Externo)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("projetoDB")))
+            {
+                try
+                {
+                    Console.WriteLine($"{playerName} {clubName} {position} {url}");
+                    List<Jogador> players = new List<Jogador>();
+                    players.Add(new Jogador
+                    {
+                        playerName = playerName,
+                        clubName = clubName,
+                        position = position,
+                        Nationality = nationality,
+                        BirthDate = birthdate,
+                        Height = height,
+                        Weight = weight,
+                        URL = url,
+                        ID_Externo = ID_Externo
+                    });
+
+                    connection.Execute("dbo.p_insertPlayerByName @playerName, @clubName, @position, @URL, @Nationality, @BirthDate, @Height, @Weight, @ID_Externo", players);
+
+                }
+                catch (System.Data.SqlClient.SqlException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Establishes a connection with LocalDB/projetoDB and tries to insert a Position into it with given parameters, 
+        /// using p_insertPosition Stored Procedure.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="sportName"></param>
+        public void insertPosition(string name, string sportName)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("projetoDB")))
+            {
+                try
+                {
+                    List<Posição> positions = new List<Posição>();
+                    positions.Add(new Posição {Position = name, SportName = sportName });
+                    connection.Execute("dbo.p_insertPosition @Position, @SportName", positions);
+                }
+                catch (System.Data.SqlClient.SqlException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Establishes a connection with LocalDB/projetoDB and tries to insert a URL into it with given parameters, 
+        /// using p_insertURL Stored Procedure.
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="urltype"></param>
         public void insertURL(string url, string urltype)
         {
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("projetoDB")))
             {
                 try
                 {
-                    String query = String.Format("insert into URL_Externo(URL_Externo, Data_Criação, URL_Type) values('{0}', GETDATE(), '{1}');", url, urltype);
-                    connection.Execute(query);
-                    Console.WriteLine($"URL {url} successfully inserted into DB");
+                    List<URL> list = new List<URL>();
+                    list.Add(new URL {url = url, URL_Type = urltype});
+                    connection.Execute("dbo.p_insertURL @URL, @URLType", list);
                 }
-                catch (System.Data.SqlClient.SqlException except)
+                catch (System.Data.SqlClient.SqlException e)
                 {
-                    Console.WriteLine($"URL {url}  not inserted into DB due to {except.Message}");
+                    Console.WriteLine(e.Message);
                 }
             }
         }
-
-        public void insertClub(string clubName, string sport, string url, string leagueName)
-        {
-            if(getAnything<URL>("URL_Externo", url, "URL_Externo").Count == 0)
-                insertURL(url, "Club");
-
-            if (getAnything<League>("Liga", leagueName, "Nome").Count == 0)
-                insertLeague(leagueName, null, sport, null);
-
-            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("projetoDB")))
-            {
-                try
-                {
-                    String query = String.Format("insert into Clube(Nome, Nome_Desporto, URL_Externo, Nome_Liga) values('{0}', '{1}', '{2}', '{3}');", clubName, sport, url, leagueName);
-                    connection.Execute(query);
-                    Console.WriteLine($"Club {clubName} successfully inserted into DB");
-                }
-                catch (System.Data.SqlClient.SqlException except)
-                {
-                    Console.WriteLine($"Club {clubName} not inserted into DB due to {except.Message}");
-                }
-            }
-        }
-
-        public void insertPlayer(string name, string clubName, string url, string position, int ID)
-        {
-            if (getAnything<URL>("URL_Externo", url, "URL_Externo").Count == 0)
-                insertURL(url, "Player");
-
-            if (getAnything<Club>("Clube", clubName, "Nome").Count == 0)
-                insertClub(clubName, null, "Football", null);
-
-            if (getAnything<Person>("Pessoa", ID.ToString(), "ID").Count == 0)
-                insertPerson(name, ID);
-
-            if (getAnything<Posição>("Posição", position, "Designação").Count == 0)
-                insertPosition(position);
-
-            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("projetoDB")))
-            {
-                try
-                {
-                    String query = String.Format("insert into Jogador(ID, Nome, Nome_Clube, Nome_Desporto, URL_Externo, Designação_Posição) values('{0}', '{1}', '{2}', '{3}','{4},'{5});", ID, name, clubName, "Football", url, position);
-                    connection.Execute(query);
-                    Console.WriteLine($"Player {name} successfully inserted into DB");
-                }
-                catch (System.Data.SqlClient.SqlException except)
-                {
-                    Console.WriteLine($"Player {name} not inserted into DB due to {except.Message}");
-                }
-            }
-        }
+      
 
         public List<T> getAnything<T>(string tableName, string member, string primaryKey)
         {

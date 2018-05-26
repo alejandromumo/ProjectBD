@@ -16,11 +16,14 @@ namespace ProjetoBD
 
         public DateTime DataNascimento { get; set; }
 
+        public int ID_Externo { get; set; }
+
+
         public String FullInfo
         {
             get
             {
-                return $"{Nome} {Nacionalidade} {DataNascimento}";
+                return $"{Nome} {Nacionalidade} {DataNascimento} {ID_Externo}";
             }
         }
     }

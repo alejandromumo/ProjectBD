@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace ProjetoBD
 {
-    class Posição
+    public class Posição
     {
-        public String Designação { get; set; }
+        public String Position { get; set; }
 
-        public String Nome_Desporto { get; set; }
+        public String SportName { get; set; }
 
     }
 }

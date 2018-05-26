@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace ProjetoBD
 {
-    public class URL
+    class Sport
     {
-        public String url { get; set; }
+        public string URL { get; set; }
+        public string SportName{ get; set; }
 
-        public String URL_Type { get; set; }
     }
 }

@@ -52,6 +52,7 @@
     <Compile Include="Club.cs" />
     <Compile Include="Jogador.cs" />
     <Compile Include="Posição.cs" />
+    <Compile Include="Sport.cs" />
     <Compile Include="URL.cs" />
     <Compile Include="DataAccess.cs" />
     <Compile Include="Helper.cs" />

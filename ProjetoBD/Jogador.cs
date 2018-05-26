@@ -6,21 +6,33 @@ using System.Threading.Tasks;
 
 namespace ProjetoBD
 {
-    class Jogador
+    public class Jogador
     {
-        public int ID { get; set; }
+        public String playerName { get; set; }
 
-        public String Nome_Clube { get; set; }
+        public String clubName { get; set; }
 
-        public String Nome_Desporto { get; set; }
+        public String position { get; set; }
 
-        public String Nome_Liga { get; set; }
+        public String URL { get; set; }
 
-        public String Nome { get; set; }
+        public String Nationality { get; set; }
 
-        public String Designação_Posição { get; set; }
+        public DateTime? BirthDate { get; set; }
 
-        public int URL_Externo { get; set; }
+        public int? Height { get; set; }
+
+        public int? Weight { get; set; }
+
+        public int? ID_Externo { get; set; }
+
+        public String FullInfo
+        {
+            get
+            {
+                return $"{playerName} {BirthDate} {Height} {Weight} {clubName} {position} {ID_Externo}";
+            }
+        }
 
 
     }
