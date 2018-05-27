@@ -17,15 +17,17 @@ namespace ProjetoBD
         List<Jogador> player = new List<Jogador>();
         List<Club> club = new List<Club>();
         List<Report> reports = new List<Report>();
+        List<Categoria> categories = new List<Categoria>();
+        List<Atributo> attributes = new List<Atributo>();
         DataAccess db;
+        Utilizador currentUser = null;
 
         public Form1()
         {
             InitializeComponent();
             this.db = new DataAccess();
-            updateBinding(Lista_Jogadores_Encontrados , this.player, "FullInfo");
             updateBinding(Lista_Observações, this.reports, "FullInfo");
-            updateBinding(Lista_Clubes_Encontrados, this.club, "FullInfo");
+            hideAllComponents();
         }
 
         private void updateBinding<T>(ListBox listBox, List<T> list, string info)
@@ -37,8 +39,34 @@ namespace ProjetoBD
         private void SearchButton_Click(object sender, EventArgs e)
         {
             this.player = db.getPlayerByName(PlayerNameTB.Text);
+            var bindingPlayerList = new BindingList<Jogador>(player);
+            var source = new BindingSource(bindingPlayerList, null);
+            Lista_Jogadores_Encontrados.DataSource = source;
+        }
 
-            updateBinding(Lista_Jogadores_Encontrados, this.player, "FullInfo");
+        private void clubSearchButton_Click(object sender, EventArgs e)
+        {
+            this.club = db.getClubByName(clubNameTB.Text);
+            var bindingClubList = new BindingList<Club>(club);
+            var source = new BindingSource(bindingClubList, null);
+            listaClubesEncontrados.DataSource = source;
+
+        }
+
+        private void positionCategoriesButton_Click(object sender, EventArgs e)
+        {
+            this.categories = db.getPositionCategoriesByName(positionCategoriesTB.Text);
+            var bindingCategoriesList = new BindingList<Categoria>(categories);
+            var source = new BindingSource(bindingCategoriesList, null);
+            listaCategorias.DataSource = source;
+        }
+
+        private void attributesButton_Click(object sender, EventArgs e)
+        {
+            this.attributes = db.getCategoryAttributesByName(positionAttributesTB.Text, categoryAttributesTB.Text);
+            var bindingAttributesList = new BindingList<Atributo>(attributes);
+            var source = new BindingSource(bindingAttributesList, null);
+            listaAtributosEncontrados.DataSource = source;
         }
 
         private void getReportsButton_Click(object sender, EventArgs e)
@@ -128,13 +156,6 @@ namespace ProjetoBD
 
         }
 
-        private void clubSearchButton_Click(object sender, EventArgs e)
-        {
-            this.club = db.getClubByName(clubNameTB.Text);
-            updateBinding(Lista_Clubes_Encontrados, this.club, "FullInfo");
-
-        }
-
         private void button1_Click_2(object sender, EventArgs e)
         {
 
@@ -144,5 +165,64 @@ namespace ProjetoBD
         {
             db.insertPosition(addPositionTB.Text, "Football");
         }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void loginButton_Click(object sender, EventArgs e)
+        {
+            List<Utilizador> loginUser = db.loginUser(usernameTB.Text, null, passwordTB.Text);
+            if(loginUser.Count != 0)
+            {
+                MessageBox.Show($"User {usernameTB.Text} successfully authenticated");
+                this.currentUser = loginUser[0];
+                this.currentUser.authenticated = true;
+                if (currentUser.role == "admin")
+                {
+                    showAllComponents();
+                }
+                else
+                {
+                    showAllComponents();
+                }
+
+            }
+            else
+            {
+                MessageBox.Show($"Couldn't authenticate user {usernameTB.Text}");
+                hideAllComponents();
+            }
+        }
+
+        private void hideAllComponents()
+        {
+            foreach (Control c in this.Controls)
+            {
+                if(c.Name != "passwordTB" && c.Name != "usernameTB" && c.Name != "loginButton" && c.Name != "label5" && c.Name != "label6")
+                {
+                    c.Visible = false;
+                }
+            }
+        }
+
+        private void showAllComponents()
+        {
+            foreach (Control c in this.Controls)
+            {
+                if (c.Name != "passwordTB" && c.Name != "usernameTB" && c.Name != "loginButton" && c.Name != "label5" && c.Name != "label6")
+                {
+                    if (this.currentUser.role == "scout" && c.Name == "clubNameTB")
+                        c.Visible = false;
+                    else
+                        c.Visible = true;
+                }
+                else
+                    c.Visible = false;
+            }
+        }
+
+
     }
 }

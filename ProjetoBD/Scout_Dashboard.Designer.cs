@@ -32,7 +32,6 @@
             this.PlayerNameTB = new System.Windows.Forms.TextBox();
             this.NameLabel = new System.Windows.Forms.Label();
             this.SearchButton = new System.Windows.Forms.Button();
-            this.Lista_Jogadores_Encontrados = new System.Windows.Forms.ListBox();
             this.getReportsButton = new System.Windows.Forms.Button();
             this.InsertIntoDBButton = new System.Windows.Forms.Button();
             this.insertionTypeCheck = new System.Windows.Forms.CheckedListBox();
@@ -42,7 +41,6 @@
             this.addSportButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.Lista_Clubes_Encontrados = new System.Windows.Forms.ListBox();
             this.label3 = new System.Windows.Forms.Label();
             this.clubNameTB = new System.Windows.Forms.TextBox();
             this.clubSearchButton = new System.Windows.Forms.Button();
@@ -50,14 +48,35 @@
             this.addPositionButton = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.addPositionTB = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.usernameTB = new System.Windows.Forms.TextBox();
+            this.passwordTB = new System.Windows.Forms.TextBox();
+            this.loginButton = new System.Windows.Forms.Button();
+            this.Lista_Jogadores_Encontrados = new System.Windows.Forms.DataGridView();
+            this.listaClubesEncontrados = new System.Windows.Forms.DataGridView();
+            this.listaCategorias = new System.Windows.Forms.DataGridView();
+            this.label7 = new System.Windows.Forms.Label();
+            this.positionCategoriesTB = new System.Windows.Forms.TextBox();
+            this.positionCategoriesButton = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.positionAttributesTB = new System.Windows.Forms.TextBox();
+            this.listaAtributosEncontrados = new System.Windows.Forms.DataGridView();
+            this.attributesButton = new System.Windows.Forms.Button();
+            this.categoryAttributesTB = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.Lista_Jogadores_Encontrados)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.listaClubesEncontrados)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.listaCategorias)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.listaAtributosEncontrados)).BeginInit();
             this.SuspendLayout();
             // 
             // Lista_Observações
             // 
             this.Lista_Observações.FormattingEnabled = true;
-            this.Lista_Observações.Location = new System.Drawing.Point(12, 428);
+            this.Lista_Observações.Location = new System.Drawing.Point(502, 230);
             this.Lista_Observações.Name = "Lista_Observações";
-            this.Lista_Observações.Size = new System.Drawing.Size(607, 56);
+            this.Lista_Observações.Size = new System.Drawing.Size(97, 56);
             this.Lista_Observações.TabIndex = 0;
             // 
             // PlayerNameTB
@@ -86,17 +105,9 @@
             this.SearchButton.UseVisualStyleBackColor = true;
             this.SearchButton.Click += new System.EventHandler(this.SearchButton_Click);
             // 
-            // Lista_Jogadores_Encontrados
-            // 
-            this.Lista_Jogadores_Encontrados.FormattingEnabled = true;
-            this.Lista_Jogadores_Encontrados.Location = new System.Drawing.Point(15, 236);
-            this.Lista_Jogadores_Encontrados.Name = "Lista_Jogadores_Encontrados";
-            this.Lista_Jogadores_Encontrados.Size = new System.Drawing.Size(604, 186);
-            this.Lista_Jogadores_Encontrados.TabIndex = 4;
-            // 
             // getReportsButton
             // 
-            this.getReportsButton.Location = new System.Drawing.Point(15, 500);
+            this.getReportsButton.Location = new System.Drawing.Point(502, 292);
             this.getReportsButton.Name = "getReportsButton";
             this.getReportsButton.Size = new System.Drawing.Size(75, 23);
             this.getReportsButton.TabIndex = 5;
@@ -182,15 +193,6 @@
             this.label2.TabIndex = 13;
             this.label2.Text = "Sport URL : ";
             // 
-            // Lista_Clubes_Encontrados
-            // 
-            this.Lista_Clubes_Encontrados.FormattingEnabled = true;
-            this.Lista_Clubes_Encontrados.Location = new System.Drawing.Point(15, 56);
-            this.Lista_Clubes_Encontrados.Name = "Lista_Clubes_Encontrados";
-            this.Lista_Clubes_Encontrados.Size = new System.Drawing.Size(239, 95);
-            this.Lista_Clubes_Encontrados.TabIndex = 14;
-            this.Lista_Clubes_Encontrados.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -199,6 +201,7 @@
             this.label3.Size = new System.Drawing.Size(59, 13);
             this.label3.TabIndex = 15;
             this.label3.Text = "Club Name";
+            this.label3.Visible = false;
             // 
             // clubNameTB
             // 
@@ -206,6 +209,7 @@
             this.clubNameTB.Name = "clubNameTB";
             this.clubNameTB.Size = new System.Drawing.Size(100, 20);
             this.clubNameTB.TabIndex = 16;
+            this.clubNameTB.Visible = false;
             // 
             // clubSearchButton
             // 
@@ -215,6 +219,7 @@
             this.clubSearchButton.TabIndex = 17;
             this.clubSearchButton.Text = "Search";
             this.clubSearchButton.UseVisualStyleBackColor = true;
+            this.clubSearchButton.Visible = false;
             this.clubSearchButton.Click += new System.EventHandler(this.clubSearchButton_Click);
             // 
             // nextButton
@@ -229,7 +234,7 @@
             // 
             // addPositionButton
             // 
-            this.addPositionButton.Location = new System.Drawing.Point(240, 523);
+            this.addPositionButton.Location = new System.Drawing.Point(527, 347);
             this.addPositionButton.Name = "addPositionButton";
             this.addPositionButton.Size = new System.Drawing.Size(75, 23);
             this.addPositionButton.TabIndex = 19;
@@ -240,7 +245,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(154, 500);
+            this.label4.Location = new System.Drawing.Point(449, 328);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(47, 13);
             this.label4.TabIndex = 20;
@@ -248,16 +253,177 @@
             // 
             // addPositionTB
             // 
-            this.addPositionTB.Location = new System.Drawing.Point(215, 497);
+            this.addPositionTB.Location = new System.Drawing.Point(502, 321);
             this.addPositionTB.Name = "addPositionTB";
             this.addPositionTB.Size = new System.Drawing.Size(100, 20);
             this.addPositionTB.TabIndex = 21;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(237, 180);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(53, 13);
+            this.label5.TabIndex = 22;
+            this.label5.Text = "username";
+            this.label5.Click += new System.EventHandler(this.label5_Click);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(238, 201);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(52, 13);
+            this.label6.TabIndex = 23;
+            this.label6.Text = "password";
+            // 
+            // usernameTB
+            // 
+            this.usernameTB.Location = new System.Drawing.Point(296, 177);
+            this.usernameTB.Name = "usernameTB";
+            this.usernameTB.Size = new System.Drawing.Size(100, 20);
+            this.usernameTB.TabIndex = 24;
+            // 
+            // passwordTB
+            // 
+            this.passwordTB.Location = new System.Drawing.Point(296, 201);
+            this.passwordTB.Name = "passwordTB";
+            this.passwordTB.PasswordChar = '*';
+            this.passwordTB.Size = new System.Drawing.Size(100, 20);
+            this.passwordTB.TabIndex = 25;
+            // 
+            // loginButton
+            // 
+            this.loginButton.Location = new System.Drawing.Point(402, 191);
+            this.loginButton.Name = "loginButton";
+            this.loginButton.Size = new System.Drawing.Size(75, 23);
+            this.loginButton.TabIndex = 26;
+            this.loginButton.Text = "login";
+            this.loginButton.UseVisualStyleBackColor = true;
+            this.loginButton.Click += new System.EventHandler(this.loginButton_Click);
+            // 
+            // Lista_Jogadores_Encontrados
+            // 
+            this.Lista_Jogadores_Encontrados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.Lista_Jogadores_Encontrados.Location = new System.Drawing.Point(85, 230);
+            this.Lista_Jogadores_Encontrados.Name = "Lista_Jogadores_Encontrados";
+            this.Lista_Jogadores_Encontrados.Size = new System.Drawing.Size(67, 31);
+            this.Lista_Jogadores_Encontrados.TabIndex = 27;
+            // 
+            // listaClubesEncontrados
+            // 
+            this.listaClubesEncontrados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.listaClubesEncontrados.Location = new System.Drawing.Point(15, 56);
+            this.listaClubesEncontrados.Name = "listaClubesEncontrados";
+            this.listaClubesEncontrados.Size = new System.Drawing.Size(257, 115);
+            this.listaClubesEncontrados.TabIndex = 28;
+            // 
+            // listaCategorias
+            // 
+            this.listaCategorias.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.listaCategorias.Location = new System.Drawing.Point(15, 402);
+            this.listaCategorias.Name = "listaCategorias";
+            this.listaCategorias.Size = new System.Drawing.Size(390, 150);
+            this.listaCategorias.TabIndex = 29;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(12, 373);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(46, 13);
+            this.label7.TabIndex = 30;
+            this.label7.Text = "position:";
+            // 
+            // positionCategoriesTB
+            // 
+            this.positionCategoriesTB.Location = new System.Drawing.Point(65, 373);
+            this.positionCategoriesTB.Name = "positionCategoriesTB";
+            this.positionCategoriesTB.Size = new System.Drawing.Size(100, 20);
+            this.positionCategoriesTB.TabIndex = 31;
+            // 
+            // positionCategoriesButton
+            // 
+            this.positionCategoriesButton.Location = new System.Drawing.Point(184, 373);
+            this.positionCategoriesButton.Name = "positionCategoriesButton";
+            this.positionCategoriesButton.Size = new System.Drawing.Size(75, 23);
+            this.positionCategoriesButton.TabIndex = 32;
+            this.positionCategoriesButton.Text = "search";
+            this.positionCategoriesButton.UseVisualStyleBackColor = true;
+            this.positionCategoriesButton.Click += new System.EventHandler(this.positionCategoriesButton_Click);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(681, 13);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(43, 13);
+            this.label8.TabIndex = 33;
+            this.label8.Text = "position";
+            // 
+            // positionAttributesTB
+            // 
+            this.positionAttributesTB.Location = new System.Drawing.Point(730, 13);
+            this.positionAttributesTB.Name = "positionAttributesTB";
+            this.positionAttributesTB.Size = new System.Drawing.Size(100, 20);
+            this.positionAttributesTB.TabIndex = 34;
+            // 
+            // listaAtributosEncontrados
+            // 
+            this.listaAtributosEncontrados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.listaAtributosEncontrados.Location = new System.Drawing.Point(684, 71);
+            this.listaAtributosEncontrados.Name = "listaAtributosEncontrados";
+            this.listaAtributosEncontrados.Size = new System.Drawing.Size(497, 276);
+            this.listaAtributosEncontrados.TabIndex = 35;
+            // 
+            // attributesButton
+            // 
+            this.attributesButton.Location = new System.Drawing.Point(849, 40);
+            this.attributesButton.Name = "attributesButton";
+            this.attributesButton.Size = new System.Drawing.Size(75, 23);
+            this.attributesButton.TabIndex = 36;
+            this.attributesButton.Text = "search";
+            this.attributesButton.UseVisualStyleBackColor = true;
+            this.attributesButton.Click += new System.EventHandler(this.attributesButton_Click);
+            // 
+            // categoryAttributesTB
+            // 
+            this.categoryAttributesTB.Location = new System.Drawing.Point(730, 43);
+            this.categoryAttributesTB.Name = "categoryAttributesTB";
+            this.categoryAttributesTB.Size = new System.Drawing.Size(100, 20);
+            this.categoryAttributesTB.TabIndex = 38;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(681, 43);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(48, 13);
+            this.label9.TabIndex = 37;
+            this.label9.Text = "category";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(631, 564);
+            this.ClientSize = new System.Drawing.Size(1193, 564);
+            this.Controls.Add(this.categoryAttributesTB);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.attributesButton);
+            this.Controls.Add(this.listaAtributosEncontrados);
+            this.Controls.Add(this.positionAttributesTB);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.positionCategoriesButton);
+            this.Controls.Add(this.positionCategoriesTB);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.listaCategorias);
+            this.Controls.Add(this.listaClubesEncontrados);
+            this.Controls.Add(this.Lista_Jogadores_Encontrados);
+            this.Controls.Add(this.loginButton);
+            this.Controls.Add(this.passwordTB);
+            this.Controls.Add(this.usernameTB);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.addPositionTB);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.addPositionButton);
@@ -265,7 +431,6 @@
             this.Controls.Add(this.clubSearchButton);
             this.Controls.Add(this.clubNameTB);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.Lista_Clubes_Encontrados);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.addSportButton);
@@ -275,7 +440,6 @@
             this.Controls.Add(this.insertionTypeCheck);
             this.Controls.Add(this.InsertIntoDBButton);
             this.Controls.Add(this.getReportsButton);
-            this.Controls.Add(this.Lista_Jogadores_Encontrados);
             this.Controls.Add(this.SearchButton);
             this.Controls.Add(this.NameLabel);
             this.Controls.Add(this.PlayerNameTB);
@@ -283,6 +447,10 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.Lista_Jogadores_Encontrados)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.listaClubesEncontrados)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.listaCategorias)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.listaAtributosEncontrados)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -294,7 +462,6 @@
         private System.Windows.Forms.TextBox PlayerNameTB;
         private System.Windows.Forms.Label NameLabel;
         private System.Windows.Forms.Button SearchButton;
-        private System.Windows.Forms.ListBox Lista_Jogadores_Encontrados;
         private System.Windows.Forms.Button getReportsButton;
         private System.Windows.Forms.CheckedListBox insertionTypeCheck;
         private System.Windows.Forms.TextBox InsertFromTextBox;
@@ -304,7 +471,6 @@
         private System.Windows.Forms.Button addSportButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ListBox Lista_Clubes_Encontrados;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox clubNameTB;
         private System.Windows.Forms.Button clubSearchButton;
@@ -312,6 +478,23 @@
         private System.Windows.Forms.Button addPositionButton;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox addPositionTB;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox usernameTB;
+        private System.Windows.Forms.TextBox passwordTB;
+        private System.Windows.Forms.Button loginButton;
+        private System.Windows.Forms.DataGridView Lista_Jogadores_Encontrados;
+        private System.Windows.Forms.DataGridView listaClubesEncontrados;
+        private System.Windows.Forms.DataGridView listaCategorias;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox positionCategoriesTB;
+        private System.Windows.Forms.Button positionCategoriesButton;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox positionAttributesTB;
+        private System.Windows.Forms.DataGridView listaAtributosEncontrados;
+        private System.Windows.Forms.Button attributesButton;
+        private System.Windows.Forms.TextBox categoryAttributesTB;
+        private System.Windows.Forms.Label label9;
     }
 }
 

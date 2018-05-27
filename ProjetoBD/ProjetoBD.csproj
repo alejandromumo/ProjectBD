@@ -49,6 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Atributo.cs" />
+    <Compile Include="Categoria.cs" />
     <Compile Include="Club.cs" />
     <Compile Include="Jogador.cs" />
     <Compile Include="Posição.cs" />
@@ -67,6 +69,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilizador.cs" />
     <EmbeddedResource Include="Scout_Dashboard.resx">
       <DependentUpon>Scout_Dashboard.cs</DependentUpon>
     </EmbeddedResource>

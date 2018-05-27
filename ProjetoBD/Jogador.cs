@@ -25,15 +25,5 @@ namespace ProjetoBD
         public int? Weight { get; set; }
 
         public int? ID_Externo { get; set; }
-
-        public String FullInfo
-        {
-            get
-            {
-                return $"{playerName} {BirthDate} {Height} {Weight} {clubName} {position} {ID_Externo}";
-            }
-        }
-
-
     }
 }

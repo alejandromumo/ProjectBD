@@ -122,6 +122,77 @@ namespace ProjetoBD
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="position"></param>
+        /// <returns></returns>
+        public List<Categoria> getPositionCategoriesByName(string position)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("projetoDB")))
+            {
+                try
+                {
+                    var retrievedPosition = connection.Query<Categoria>("dbo.p_getPositionCategoriesByName @position", new { position = position }).ToList();
+                    return retrievedPosition;
+
+                }
+                catch (System.Data.SqlClient.SqlException e)
+                {
+                    Console.WriteLine(e.Message);
+                    return null;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="position"></param>
+        /// <returns></returns>
+        public List<Atributo> getCategoryAttributesByName(string position, string category)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("projetoDB")))
+            {
+                try
+                {
+                    var retrievedAttributes = connection.Query<Atributo>("dbo.p_getCategoryAttributesByName @categoryName, @position", new { categoryName = category, position = position }).ToList();
+                    return retrievedAttributes;
+
+                }
+                catch (System.Data.SqlClient.SqlException e)
+                {
+                    Console.WriteLine(e.Message);
+                    return null;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="email"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public List<Utilizador> loginUser(string username, string email, string password)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("projetoDB")))
+            {
+                try
+                {
+                    var retrievedUser = connection.Query<Utilizador>("dbo.p_loginuser @userName, @email, @password", new { userName = username, email = email, password = password }).ToList();
+                    return retrievedUser;
+
+                }
+                catch (System.Data.SqlClient.SqlException e)
+                {
+                    Console.WriteLine(e.Message);
+                    return null;
+                }
+            }
+        }
+
+        /// <summary>
         /// Establishes a connection with LocalDB/projetoDB and tries to insert a Sport into it with given parameters, 
         /// using p_insertSportByName Stored Procedure.
         /// </summary>
@@ -278,6 +349,31 @@ namespace ProjetoBD
                     List<URL> list = new List<URL>();
                     list.Add(new URL {url = url, URL_Type = urltype});
                     connection.Execute("dbo.p_insertURL @URL, @URLType", list);
+                }
+                catch (System.Data.SqlClient.SqlException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="email"></param>
+        /// <param name="password"></param>
+        /// <param name="birthDate"></param>
+        /// <param name="role"></param>
+        public void insertUser(string username, string email, string password, DateTime? birthDate, string role)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("projetoDB")))
+            {
+                try
+                {
+                    List<Utilizador> list = new List<Utilizador>();
+                    list.Add(new Utilizador { userName = username, email = email, birthDate = birthDate, password = password, role = role });
+                    connection.Execute("dbo.p_insertUser @userName, @email, @password, @birthDate, @role", list);
                 }
                 catch (System.Data.SqlClient.SqlException e)
                 {

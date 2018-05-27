@@ -23,13 +23,5 @@ namespace ProjetoBD
         public int ID_Externo { get; set; }
 
 
-        public String FullInfo
-        {
-            get
-            {
-                return $"{ClubName} {LeagueName} {Country} {City} {URL} {ID_Externo}";
-            }
-        }
-
     }
 }
