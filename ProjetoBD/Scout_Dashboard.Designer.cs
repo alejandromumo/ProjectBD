@@ -74,7 +74,7 @@
             // Lista_Observações
             // 
             this.Lista_Observações.FormattingEnabled = true;
-            this.Lista_Observações.Location = new System.Drawing.Point(502, 230);
+            this.Lista_Observações.Location = new System.Drawing.Point(581, 291);
             this.Lista_Observações.Name = "Lista_Observações";
             this.Lista_Observações.Size = new System.Drawing.Size(97, 56);
             this.Lista_Observações.TabIndex = 0;
@@ -107,7 +107,7 @@
             // 
             // getReportsButton
             // 
-            this.getReportsButton.Location = new System.Drawing.Point(502, 292);
+            this.getReportsButton.Location = new System.Drawing.Point(581, 353);
             this.getReportsButton.Name = "getReportsButton";
             this.getReportsButton.Size = new System.Drawing.Size(75, 23);
             this.getReportsButton.TabIndex = 5;
@@ -234,7 +234,7 @@
             // 
             // addPositionButton
             // 
-            this.addPositionButton.Location = new System.Drawing.Point(527, 347);
+            this.addPositionButton.Location = new System.Drawing.Point(606, 408);
             this.addPositionButton.Name = "addPositionButton";
             this.addPositionButton.Size = new System.Drawing.Size(75, 23);
             this.addPositionButton.TabIndex = 19;
@@ -245,7 +245,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(449, 328);
+            this.label4.Location = new System.Drawing.Point(528, 389);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(47, 13);
             this.label4.TabIndex = 20;
@@ -253,7 +253,7 @@
             // 
             // addPositionTB
             // 
-            this.addPositionTB.Location = new System.Drawing.Point(502, 321);
+            this.addPositionTB.Location = new System.Drawing.Point(581, 382);
             this.addPositionTB.Name = "addPositionTB";
             this.addPositionTB.Size = new System.Drawing.Size(100, 20);
             this.addPositionTB.TabIndex = 21;
@@ -305,9 +305,9 @@
             // Lista_Jogadores_Encontrados
             // 
             this.Lista_Jogadores_Encontrados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.Lista_Jogadores_Encontrados.Location = new System.Drawing.Point(85, 230);
+            this.Lista_Jogadores_Encontrados.Location = new System.Drawing.Point(12, 230);
             this.Lista_Jogadores_Encontrados.Name = "Lista_Jogadores_Encontrados";
-            this.Lista_Jogadores_Encontrados.Size = new System.Drawing.Size(67, 31);
+            this.Lista_Jogadores_Encontrados.Size = new System.Drawing.Size(533, 140);
             this.Lista_Jogadores_Encontrados.TabIndex = 27;
             // 
             // listaClubesEncontrados
