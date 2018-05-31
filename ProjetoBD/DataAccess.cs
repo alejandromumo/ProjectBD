@@ -404,6 +404,23 @@ namespace ProjetoBD
                 }
             }
         }
+
+        public void insertAttributeEvaluation(int attributeID, int reportID, int rate)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("projetoDB")))
+            {
+                try
+                {
+                    List<AttributeEvaluation> list = new List<AttributeEvaluation>();
+                    list.Add(new AttributeEvaluation { AttributeID = attributeID, Rate = rate, ReportID = reportID });
+                    connection.Execute("dbo.p_insertAttributeEvaluation @reportID, @attributeID, @rate", list);
+                }
+                catch (System.Data.SqlClient.SqlException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+        }
       
 
         public List<T> getAnything<T>(string tableName, string member, string primaryKey)

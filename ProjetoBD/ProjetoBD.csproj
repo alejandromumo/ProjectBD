@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Atributo.cs" />
+    <Compile Include="AttributeEvaluation.cs" />
     <Compile Include="Categoria.cs" />
     <Compile Include="Club.cs" />
     <Compile Include="Jogador.cs" />
