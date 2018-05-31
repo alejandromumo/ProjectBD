@@ -46,9 +46,9 @@ namespace ProjetoBD
 
         private void clubSearchButton_Click(object sender, EventArgs e)
         {
-            this.club = db.getClubByName(clubNameTB.Text);
-            var bindingClubList = new BindingList<Club>(club);
-            var source = new BindingSource(bindingClubList, null);
+            List<Jogador> listaJogadores = db.getClubPlayers(clubNameTB.Text);
+            var bindingList = new BindingList<Jogador>(listaJogadores);
+            var source = new BindingSource(bindingList, null);
             listaClubesEncontrados.DataSource = source;
 
         }

@@ -170,6 +170,29 @@ namespace ProjetoBD
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="clubName"></param>
+        /// <returns></returns>
+        public List<Jogador> getClubPlayers(string clubName)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("projetoDB")))
+            {
+                try
+                {
+                    var retrievedAttributes = connection.Query<Jogador>("dbo.p_getClubPlayers @ClubName", new { ClubName = clubName}).ToList();
+                    return retrievedAttributes;
+
+                }
+                catch (System.Data.SqlClient.SqlException e)
+                {
+                    Console.WriteLine(e.Message);
+                    return null;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="username"></param>
         /// <param name="email"></param>
         /// <param name="password"></param>
