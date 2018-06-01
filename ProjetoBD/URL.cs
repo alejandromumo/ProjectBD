@@ -8,7 +8,7 @@ namespace ProjetoBD
 {
     public class URL
     {
-        public String url { get; set; }
+        public String URL_Externo { get; set; }
 
         public String URL_Type { get; set; }
     }

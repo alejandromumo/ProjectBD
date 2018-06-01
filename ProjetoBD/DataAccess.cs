@@ -190,6 +190,25 @@ namespace ProjetoBD
             }
         }
 
+        public List<URL> getURL(string urlType)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("projetoDB")))
+            {
+                try
+                {
+                    var retrievedList = connection.Query<URL>("dbo.p_getURL @urlType", new { urlType  = urlType}).ToList();
+                    return retrievedList;
+
+                }
+                catch (System.Data.SqlClient.SqlException e)
+                {
+                    Console.WriteLine(e.Message);
+                    return null;
+                }
+            }
+
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -405,6 +424,12 @@ namespace ProjetoBD
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="attributeID"></param>
+        /// <param name="reportID"></param>
+        /// <param name="rate"></param>
         public void insertAttributeEvaluation(int attributeID, int reportID, int rate)
         {
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("projetoDB")))
@@ -413,7 +438,7 @@ namespace ProjetoBD
                 {
                     List<AttributeEvaluation> list = new List<AttributeEvaluation>();
                     list.Add(new AttributeEvaluation { AttributeID = attributeID, Rate = rate, ReportID = reportID });
-                    connection.Execute("dbo.p_insertAttributeEvaluation @reportID, @attributeID, @rate", list);
+                    connection.Execute("dbo.p_insertAttributeEvaluation @ReportID, @AttributeID, @Rate", list);
                 }
                 catch (System.Data.SqlClient.SqlException e)
                 {
@@ -421,7 +446,30 @@ namespace ProjetoBD
                 }
             }
         }
-      
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="categoryID"></param>
+        /// <param name="reportID"></param>
+        /// <param name="rate"></param>
+        public void insertCategoryEvaluation(int categoryID, int reportID, int rate)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("projetoDB")))
+            {
+                try
+                {
+                    List<CategoryEvaluation> list = new List<CategoryEvaluation>();
+                    list.Add(new CategoryEvaluation { CategoryID = categoryID, Rate = rate, ReportID = reportID });
+                    connection.Execute("dbo.p_insertCategoryEvaluation @ReportID, @CategoryID, @Rate", list);
+                }
+                catch (System.Data.SqlClient.SqlException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+        }
+
 
         public List<T> getAnything<T>(string tableName, string member, string primaryKey)
         {
