@@ -12,18 +12,10 @@ namespace ProjetoBD
 
         public int ID_Jogador { get; set; }
 
-        public String Username_Observador { get; set; }
+        public int ID_Observador { get; set; }
 
-        public DateTime Data_Observação { get; set; }
+        public DateTime Data_Criação { get; set; }
 
         public int Rate { get; set; }
-
-        public String FullInfo
-        {
-            get
-            {
-                return $"{ID_Jogador} {Username_Observador} {Data_Observação} {Rate}";
-            }
-        }
     }
 }

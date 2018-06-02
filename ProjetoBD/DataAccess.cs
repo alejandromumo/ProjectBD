@@ -190,6 +190,11 @@ namespace ProjetoBD
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="urlType"></param>
+        /// <returns></returns>
         public List<URL> getURL(string urlType)
         {
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("projetoDB")))
@@ -207,6 +212,52 @@ namespace ProjetoBD
                 }
             }
 
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reportID"></param>
+        /// <returns></returns>
+        public List<Report> getReport(int reportID)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("projetoDB")))
+            {
+                try
+                {
+                    var retrievedList = connection.Query<Report>("dbo.p_getReport @reportID", new { reportID = reportID }).ToList();
+                    return retrievedList;
+
+                }
+                catch (System.Data.SqlClient.SqlException e)
+                {
+                    Console.WriteLine(e.Message);
+                    return null;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="playerID"></param>
+        /// <returns></returns>
+        public List<Report> getPlayerReports(int playerID)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("projetoDB")))
+            {
+                try
+                {
+                    var retrievedList = connection.Query<Report>("dbo.p_getPlayerReports @playerID", new { playerID = playerID}).ToList();
+                    return retrievedList;
+
+                }
+                catch (System.Data.SqlClient.SqlException e)
+                {
+                    Console.WriteLine(e.Message);
+                    return null;
+                }
+            }
         }
 
         /// <summary>
@@ -354,6 +405,28 @@ namespace ProjetoBD
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="playerID"></param>
+        /// <param name="scoutID"></param>
+        public void insertReport(int playerID, int scoutID)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("projetoDB")))
+            {
+                try
+                {
+                    List<Report> positions = new List<Report>();
+                    positions.Add(new Report { ID_Jogador = playerID, ID_Observador = scoutID});
+                    connection.Execute("dbo.p_insertReport @ID_Jogador, @ID_Observador", positions);
+                }
+                catch (System.Data.SqlClient.SqlException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+        }
+
+        /// <summary>
         /// Establishes a connection with LocalDB/projetoDB and tries to insert a Position into it with given parameters, 
         /// using p_insertPosition Stored Procedure.
         /// </summary>
@@ -389,7 +462,7 @@ namespace ProjetoBD
                 try
                 {
                     List<URL> list = new List<URL>();
-                    list.Add(new URL {url = url, URL_Type = urltype});
+                    list.Add(new URL {URL_Externo = url, URL_Type = urltype});
                     connection.Execute("dbo.p_insertURL @URL, @URLType", list);
                 }
                 catch (System.Data.SqlClient.SqlException e)
@@ -468,6 +541,28 @@ namespace ProjetoBD
                     Console.WriteLine(e.Message);
                 }
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="report"></param>
+        public void updateReport(Report report)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("projetoDB")))
+            {
+                try
+                {
+                    List<Report> list = new List<Report>();
+                    list.Add(report);
+                    connection.Execute("dbo.p_updateReport @ID", list);
+                }
+                catch (System.Data.SqlClient.SqlException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+
         }
 
 
