@@ -10,23 +10,6 @@ namespace ProjetoBD
 {
     public class DataAccess
     {
-        public List<Report> getReports()
-        {
-            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("projetoDB")))
-            {
-                var output = connection.Query<Report>($"select * from Observação").ToList();
-                return output;
-            }
-        }
-
-        public List<Person> getPeople(string name)
-        {
-            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("projetoDB")))
-            {
-                var output = connection.Query<Person>($"select * from Clube").ToList();
-                return output;
-            }
-        }
 
         /// <summary>
         /// Establishes a connection with LocalDB/projetoDB and queries it looking for a League with given parameters, 

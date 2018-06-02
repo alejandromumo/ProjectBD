@@ -25,5 +25,7 @@ namespace ProjetoBD
         public int? Weight { get; set; }
 
         public int? ID_Externo { get; set; }
+
+        public int ID { get; set; }
     }
 }
