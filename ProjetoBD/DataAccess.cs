@@ -509,15 +509,15 @@ namespace ProjetoBD
         /// <param name="categoryID"></param>
         /// <param name="reportID"></param>
         /// <param name="rate"></param>
-        public void insertCategoryEvaluation(int categoryID, int reportID, int rate)
+        public void insertCategoryEvaluation(int categoryID, int reportID)
         {
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("projetoDB")))
             {
                 try
                 {
                     List<CategoryEvaluation> list = new List<CategoryEvaluation>();
-                    list.Add(new CategoryEvaluation { CategoryID = categoryID, Rate = rate, ReportID = reportID });
-                    connection.Execute("dbo.p_insertCategoryEvaluation @ReportID, @CategoryID, @Rate", list);
+                    list.Add(new CategoryEvaluation { CategoryID = categoryID, Rate = 0, ReportID = reportID });
+                    connection.Execute("dbo.p_insertCategoryEvaluation @ReportID, @CategoryID", list);
                 }
                 catch (System.Data.SqlClient.SqlException e)
                 {
@@ -530,15 +530,13 @@ namespace ProjetoBD
         /// 
         /// </summary>
         /// <param name="report"></param>
-        public void updateReport(Report report)
+        public void updateReport(int reportID)
         {
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("projetoDB")))
             {
                 try
                 {
-                    List<Report> list = new List<Report>();
-                    list.Add(report);
-                    connection.Execute("dbo.p_updateReport @ID", list);
+                    connection.Execute("dbo.p_updateReport @reportID", new {reportID = reportID });
                 }
                 catch (System.Data.SqlClient.SqlException e)
                 {
@@ -548,7 +546,67 @@ namespace ProjetoBD
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="categoryID"></param>
+        /// <param name="reportID"></param>
+        public void updateCategoryEvaluation(int categoryID, int reportID)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("projetoDB")))
+            {
+                try
+                {
+                    connection.Execute("dbo.p_updateCategoryEvaluation @categoryID, @reportID", new { categoryID = categoryID ,reportID = reportID });
+                }
+                catch (System.Data.SqlClient.SqlException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+        }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="attributeID"></param>
+        /// <param name="reportID"></param>
+        /// <param name="newValue"></param>
+        public void updateAttributeEvaluation(int attributeID, int reportID, int newValue)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("projetoDB")))
+            {
+                try
+                {
+                    connection.Execute("dbo.p_updateAttributeEvaluation @attributeID, @reportID, @newValue", new {attributeID = attributeID, reportID = reportID, newValue = newValue });
+                }
+                catch (System.Data.SqlClient.SqlException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="playerID"></param>
+        public void deletePlayer(int playerID)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("projetoDB")))
+            {
+                try
+                {
+                    connection.Execute("dbo.p_deletePlayerProcedure @playerID", new {playerID = playerID });
+                }
+                catch (System.Data.SqlClient.SqlException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+        }
+
+        // TODO delete this
         public List<T> getAnything<T>(string tableName, string member, string primaryKey)
         {
                 using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("projetoDB")))
@@ -557,7 +615,6 @@ namespace ProjetoBD
                     var output = connection.Query<T>(query).ToList();
                     return output;
                 }
-         // C: \Users\mumox\Desktop\clubs_final.csv
         }
     }
 }
