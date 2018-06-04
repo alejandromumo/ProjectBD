@@ -20,6 +20,8 @@ namespace ProjetoBD
 
         public bool authenticated = false;
 
+        public int userID { get; set; }
+
         public String FullInfo
         {
             get
