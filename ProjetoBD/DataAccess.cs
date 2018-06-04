@@ -525,7 +525,7 @@ namespace ProjetoBD
                 }
             }
         }
-
+         
         /// <summary>
         /// 
         /// </summary>
@@ -579,6 +579,128 @@ namespace ProjetoBD
                 try
                 {
                     connection.Execute("dbo.p_updateAttributeEvaluation @attributeID, @reportID, @newValue", new {attributeID = attributeID, reportID = reportID, newValue = newValue });
+                }
+                catch (System.Data.SqlClient.SqlException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="oldpassword"></param>
+        /// <param name="newpassword"></param>
+        public void updatePassword(string username, string oldpassword, string newpassword)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("projetoDB")))
+            {
+                try
+                {
+                    connection.Execute("dbo.p_updatePassword @username, @oldpassword, @newpassword", new { username = username, oldpassword = oldpassword, newpassword = newpassword});
+                }
+                catch (System.Data.SqlClient.SqlException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="newUsername"></param>
+        public void updateUsername(string username, string newUsername)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("projetoDB")))
+            {
+                try
+                {
+                    connection.Execute("dbo.p_updateUsername @username, @newUsername", new { username = username, newUsername = newUsername});
+                }
+                catch (System.Data.SqlClient.SqlException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="newEmail"></param>
+        public void updateUserEmail(string username, string newEmail)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("projetoDB")))
+            {
+                try
+                {
+                    connection.Execute("dbo.p_updateUserEmail @username, @newEmail", new { username = username, newEmail = newEmail });
+                }
+                catch (System.Data.SqlClient.SqlException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="playerID"></param>
+        /// <param name="clubName"></param>
+        public void updatePlayerClub(int playerID, string clubName, Boolean isAdmin)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("projetoDB")))
+            {
+                try
+                {
+                    connection.Execute("dbo.p_updatePlayerClub @playerID, @clubName @isAdmin", new { playerID = playerID, clubName = clubName, isAdmin = isAdmin });
+                }
+                catch (System.Data.SqlClient.SqlException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="playerID"></param>
+        /// <param name="playerName"></param>
+        public void updatePlayerName(int playerID, string playerName, Boolean isAdmin)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("projetoDB")))
+            {
+                try
+                {
+                    connection.Execute("dbo.p_updatePlayerName @playerID, @playerName, @isAdmin", new { playerID = playerID, playerName = playerName, isAdmin = isAdmin});
+                }
+                catch (System.Data.SqlClient.SqlException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="playerID"></param>
+        /// <param name="playerURL"></param>
+        public void updatePlayerURL(int playerID, string playerURL, Boolean isAdmin)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("projetoDB")))
+            {
+                try
+                {
+                    connection.Execute("dbo.p_updatePlayerURL @playerID, @playerURL, @isAdmin", new { playerID = playerID, playerURL = playerURL, isAdmin = isAdmin});
                 }
                 catch (System.Data.SqlClient.SqlException e)
                 {
