@@ -72,8 +72,8 @@ namespace ProjetoBD
 
         private void getReportsButton_Click(object sender, EventArgs e)
         {
-            this.reports = db.getReports();
-            updateBinding(Lista_Observações, this.reports, "FullInfo");
+            //this.reports = db.getReports();
+            //updateBinding(Lista_Observações, this.reports, "FullInfo");
         }
 
         private void Form1_Load(object sender, EventArgs e)

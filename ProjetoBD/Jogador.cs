@@ -26,6 +26,6 @@ namespace ProjetoBD
 
         public int? ID_Externo { get; set; }
 
-        public int ID { get; set; }
+        public int playerID { get; set; }
     }
 }
