@@ -65,6 +65,7 @@
             this.attributesButton = new System.Windows.Forms.Button();
             this.categoryAttributesTB = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Lista_Jogadores_Encontrados)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.listaClubesEncontrados)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.listaCategorias)).BeginInit();
@@ -373,7 +374,7 @@
             this.listaAtributosEncontrados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.listaAtributosEncontrados.Location = new System.Drawing.Point(684, 71);
             this.listaAtributosEncontrados.Name = "listaAtributosEncontrados";
-            this.listaAtributosEncontrados.Size = new System.Drawing.Size(497, 276);
+            this.listaAtributosEncontrados.Size = new System.Drawing.Size(497, 122);
             this.listaAtributosEncontrados.TabIndex = 35;
             // 
             // attributesButton
@@ -402,11 +403,22 @@
             this.label9.TabIndex = 37;
             this.label9.Text = "category";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(849, 291);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 41;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_3);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1277, 564);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.categoryAttributesTB);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.attributesButton);
@@ -495,6 +507,7 @@
         private System.Windows.Forms.Button attributesButton;
         private System.Windows.Forms.TextBox categoryAttributesTB;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button button1;
     }
 }
 

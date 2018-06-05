@@ -392,19 +392,19 @@ namespace ProjetoBD
         /// </summary>
         /// <param name="playerID"></param>
         /// <param name="scoutID"></param>
-        public void insertReport(int playerID, int scoutID)
+        public List<Report> insertReport(int playerID, int scoutID)
         {
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("projetoDB")))
             {
                 try
                 {
-                    List<Report> positions = new List<Report>();
-                    positions.Add(new Report { ID_Jogador = playerID, ID_Observador = scoutID});
-                    connection.Execute("dbo.p_insertReport @ID_Jogador, @ID_Observador", positions);
+                    var retrievedList = connection.Query<Report>("dbo.p_insertReport @ID_Jogador, @ID_Observador", new { ID_Jogador = playerID, ID_Observador = scoutID }).ToList();
+                    return retrievedList;
                 }
                 catch (System.Data.SqlClient.SqlException e)
                 {
                     Console.WriteLine(e.Message);
+                    return null;
                 }
             }
         }

@@ -224,6 +224,9 @@ namespace ProjetoBD
             }
         }
 
-
+        private void button1_Click_3(object sender, EventArgs e)
+        {
+            db.insertReport(6788, this.currentUser.userID);
+        }
     }
 }
