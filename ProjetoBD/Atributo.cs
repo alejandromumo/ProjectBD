@@ -14,5 +14,9 @@ namespace ProjetoBD
 
         public string position { get; set; }
 
+        public int categoryID { get; set; }
+
+        public int attributeID { get; set; }
+
     }
 }
