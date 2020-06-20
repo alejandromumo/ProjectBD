@@ -24,3 +24,6 @@ In order to connect to the database and access it, a .NET interface was implemen
 
 ## Visualization
 The visual application developed for this project is not in the scope of this repository. Nonetheless, it was built using a Model-view-viewmodel pattern in C#. Refer to the project https://github.com/rodrigogonegit/ihcprojectUI 
+
+## Data
+Data was extracted and parsed from kaggle's SOFIFA data set (https://www.kaggle.com/thec03u5/fifa-18-demo-player-dataset)
