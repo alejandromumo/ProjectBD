@@ -23,4 +23,4 @@ The database was implemented using SQL and it was hosted in a Univeristy's clust
 In order to connect to the database and access it, a .NET interface was implemented. Its main function is to expose the database's public stored procedures to the visual application that the user is running.
 
 ## Visualization
-The visual application developed for this project is not in the scope of this repository. Nonetheless, it was built using a Model-view-viewmodel pattern in C#.
+The visual application developed for this project is not in the scope of this repository. Nonetheless, it was built using a Model-view-viewmodel pattern in C#. Refer to the project https://github.com/rodrigogonegit/ihcprojectUI 
